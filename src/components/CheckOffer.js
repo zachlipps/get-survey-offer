@@ -57,8 +57,8 @@ const CheckOffer = () => {
         <StyledLabel
           aria-labelledby='userIdentifier'
         >
-          Please enter your username:
-          <input
+          Enter Username:
+          <StyledText
             id='userIdentifier'
             type="text"
             value={userIdentifier}
@@ -105,7 +105,7 @@ const FormContainer = styled.div`
   height: 100%;
   max-height: 400px;
   border-radius: 26px;
-  background-color: grey;
+  background-color: lightblue;
 `
 
 const StyledForm = styled.form`
@@ -121,9 +121,14 @@ const StyledForm = styled.form`
 const StyledLabel = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   flex: 1;
+`
+
+const StyledText = styled.input`
+  width: 100%;
+  margin-top: 10px;
 `
 
 const BottomContainer = styled.div`
@@ -136,6 +141,7 @@ const BottomContainer = styled.div`
 
 const StyledSubmit = styled.input`
   padding: 17px 40px;
+  width: 100%;
   background: #f05c4f;
   color: #FFF;
   text-transform: uppercase;
@@ -154,7 +160,6 @@ const MessageContainer = styled.div`
   align-items: center;
   height: 100%;
   flex: 1;
-  border: 1px solid red;
 `
 
 const StyledValidationError = styled.div`

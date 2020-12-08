@@ -12,6 +12,7 @@ const initialState = {
 const fetchSurvey = async (userIdentifier) => {
   let response
 
+  // went with ajax for simplicity
   try {
     response = await $.ajax({
       url: 'https://www.tapresearch.com/supply_api/surveys/offer',
