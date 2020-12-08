@@ -5,11 +5,9 @@ import styled from 'styled-components'
 function App() {
   return (
     <AppStyles>
-      <div className="App">
-        <SurveryContextProvider>
-          <CheckOffer />
-        </SurveryContextProvider>
-      </div>
+      <SurveryContextProvider>
+        <CheckOffer />
+      </SurveryContextProvider>
     </AppStyles>
   )
 }
@@ -18,6 +16,9 @@ const AppStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 5%;
 `
 
 export default App

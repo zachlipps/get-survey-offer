@@ -4,8 +4,9 @@ import $ from 'jquery'
 const SurveryContext = createContext()
 
 const initialState = {
-  isFetching: false,
-  surveyData: {}
+  surveyData: {},
+  hasFetched: false,
+  isLoading: false,
 }
 
 const fetchSurvey = async (userIdentifier) => {
@@ -21,40 +22,61 @@ const fetchSurvey = async (userIdentifier) => {
       },
       method: 'POST',
     })
-  } catch(err) {
+  } catch (err) {
     console.error(err)
+    return { hasError: true }
   }
 
   return response
 }
 
-let reducer = async (state, action) => {
+let reducer = (state, action) => {
   switch (action.type) {
+    case 'api_error':
+      return { ...initialState, hasFetched: true, hasError: true }
     case 'fetching':
-      return { ...state, isFetching: true }
+      return { ...initialState, isLoading: true }
+    case 'clear_survey_data':
+      return { ...initialState }
     case 'offersReady':
-      return { surveyData: action.payload, isFetching: false }
+      return { surveyResponse: action.payload, hasFetched: true, isLoading: false }
     default:
       return state
   }
 }
 
 function SurveryContextProvider(props) {
-  let [survey, surveyReducer] = useReducer(reducer, initialState)
+  let [surveyState, dispatch] = useReducer(reducer, initialState)
 
   const fetchSurveyOffers = useCallback(async (userIdentifier) => {
-    surveyReducer({
+    dispatch({
       type: "fetching",
     })
-    const surveyData = await fetchSurvey(userIdentifier)
-    surveyReducer({
-      type: "offersReady",
-      payload: surveyData,
+
+    const surveyResponse = await fetchSurvey(userIdentifier)
+
+    const { hasError = false } = surveyResponse
+
+    if (hasError) {
+      dispatch({
+        type: "api_error",
+      })
+    } else {
+      dispatch({
+        type: "offersReady",
+        payload: surveyResponse,
+      })
+    }
+  }, [])
+
+  const clearSurveyData = () => {
+    dispatch({
+      type: "clear_survey_data",
     })
-  }, []);
+  }
 
   return (
-    <SurveryContext.Provider value={{ survey, fetchSurveyOffers }}>
+    <SurveryContext.Provider value={{ surveyState, actions: { fetchSurveyOffers, clearSurveyData } }}>
       {props.children}
     </SurveryContext.Provider>
   )

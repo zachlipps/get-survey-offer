@@ -1,67 +1,168 @@
 import React, { useContext, useState } from 'react'
-import { SurveryContext } from '../contexts'
-
 import styled from 'styled-components'
 
+import { SurveryContext } from '../contexts'
+import Spinner from './Spinner'
+
+
 const CheckOffer = () => {
-  const { fetchSurveyOffers } = useContext(SurveryContext)
+  const {
+    actions: {
+      fetchSurveyOffers = () => { },
+      clearSurveyData = () => { },
+    } = {},
+    surveyState: {
+      surveyResponse: { has_offer = false, offer_url = '' } = {},
+      hasError = false,
+      hasFetched = false,
+      isLoading = false,
+    }
+  } = useContext(SurveryContext)
   const [userIdentifier, setUserIdentifier] = useState('')
   const [validationError, setValidationError] = useState('')
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    checkErrors()
-    fetchSurveyOffers(userIdentifier)
+    clearSurveyData()
+
+    const hasValidationErrors = checkErrors()
+    if (!hasValidationErrors) {
+      fetchSurveyOffers(userIdentifier)
+    }
   }
 
   const checkErrors = () => {
-    if (userIdentifier.length === 0 ) {
+    if (userIdentifier.length === 0) {
       setValidationError('User identifier cannot be empty')
+      return true
+    }
+
+    setValidationError('')
+    return false
+  }
+
+  const handleChange = e => {
+    const { target: { value = '' } = {} } = e
+    if (value.length > 32) {
+      setValidationError('User identifier cannot be any longer than 32 characters')
+      setUserIdentifier(value.slice(0, 32))
     } else {
-      setValidationError('')
+      setUserIdentifier(value)
     }
   }
 
   return (
     <FormContainer>
       <StyledForm onSubmit={handleSubmit}>
-        <label>
+        <StyledLabel
+          aria-labelledby='userIdentifier'
+        >
           Please enter your username:
-        <input
+          <input
+            id='userIdentifier'
             type="text"
             value={userIdentifier}
-            onChange={e => {
-              const { target: { value = '' } = {} } = e
-              if (value.length > 32) {
-                setValidationError('User identifier cannot be any longer than 32 characters')
-                setUserIdentifier(value.slice(0, 32))
-              } else {
-                setUserIdentifier(value)
-              }
-            }}
+            onChange={handleChange}
+            aria-label='please enter your username'
           />
-        </label>
-        <input type="submit" value="Submit" />
-        <StyledValidationError>{validationError}</StyledValidationError>
+        </StyledLabel>
+        <BottomContainer>
+          <StyledSubmit type="submit" value="Submit" />
+          <MessageContainer>
+            {isLoading && <Spinner />}
+            {!isLoading && (
+              <>
+                <StyledValidationError>{validationError}</StyledValidationError>
+                {has_offer && hasFetched && (
+                  <StyledLink
+                    target='_blank'
+                    href={offer_url}
+                  >
+                    Take Survey
+                  </StyledLink>
+                )}
+                {hasFetched && !has_offer && (
+                  <span>
+                    No survey available
+                  </span>
+                )}
+                {hasError && (
+                  'Sorry there was an error, please try again'
+                )}
+              </>
+            )}
+          </MessageContainer>
+        </BottomContainer>
       </StyledForm>
     </FormContainer>
   )
 }
 
 const FormContainer = styled.div`
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  max-height: 400px;
+  border-radius: 26px;
+  background-color: grey;
 `
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  width: 275px;
+  height: 100%;
+  padding: 20px;
+`
+
+const StyledLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+`
+
+const BottomContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const StyledSubmit = styled.input`
+  padding: 17px 40px;
+  background: #f05c4f;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  -moz-border-radius: 26px;
+  -webkit-border-radius: 26px;
+  border-radius: 26px;
+  justify-content: space-around;
+`
+
+const MessageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  border: 1px solid red;
 `
 
 const StyledValidationError = styled.div`
   color: red;
+`
+
+const StyledLink = styled.a`
+  cursor: pointer;
 `
 
 export default CheckOffer
