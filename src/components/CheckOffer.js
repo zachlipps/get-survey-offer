@@ -135,7 +135,7 @@ const BottomContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `
 
@@ -152,13 +152,13 @@ const StyledSubmit = styled.input`
   -webkit-border-radius: 26px;
   border-radius: 26px;
   justify-content: space-around;
+  margin-top: 20px;
 `
 
 const MessageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   flex: 1;
 `
 
