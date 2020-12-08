@@ -1,0 +1,304 @@
+<html>
+
+<head>
+  <title>Weekly weather</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+    }
+
+    body {
+      background-image: linear-gradient(#3a71a2, #010203);
+      font-family: Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      padding: 28px 0;
+      font-weight: 400;
+    }
+
+    .main-app {
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10% 0;
+      width: 100%;
+    }
+
+    .day-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .day-label {
+      padding: 16px 0;
+    }
+
+    .day-panel {
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      margin-bottom: 3px;
+      width: 100%;
+    }
+
+    .date {
+      font-weight: 600;
+    }
+
+    .conditions {
+      font-size: .8em;
+    }
+
+    @media only screen and (min-width: 480px) {
+      .main-app {
+        padding: 10% 20%;
+      }
+
+      .day-panel {
+        padding: auto;
+      }
+
+      .day-panel:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+
+      .day-panel:last-child {
+        border-radius: 0 0 4px 4px;
+      }
+    }
+
+    @media only screen and (min-width: 900px) {
+      .main-app {
+        padding: 5% 10%;
+        align-items: flex-start;
+      }
+
+      h1 {
+        align-self: center;
+      }
+
+      .day-group {
+        flex-direction: row;
+        align-items: flex-start;
+        width: auto;
+        padding: 0;
+      }
+
+      .day-panel,
+      .day-panel:first-child,
+      .day-panel:last-child {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 8px;
+        height: 80px;
+        width: 80px;
+        border-radius: 4px;
+        margin: 0 4px;
+      }
+
+      .date {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-app">
+      <h1>Moscow</h1>
+      <div class="day-label">Monday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">6PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+      </div>
+      <div class="day-label">Tuesday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">12AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">12PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+      </div>
+      <div class="day-label">Wednesday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">12AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">12PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9PM</div>
+          <div class="conditions">light snow</div>
+        </div>
+      </div>
+      <div class="day-label">Thursday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">12AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3AM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6AM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9AM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">12PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6PM</div>
+          <div class="conditions">few clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9PM</div>
+          <div class="conditions">scattered clouds</div>
+        </div>
+      </div>
+      <div class="day-label">Friday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">12AM</div>
+          <div class="conditions">scattered clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3AM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6AM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9AM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">12PM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6PM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9PM</div>
+          <div class="conditions">scattered clouds</div>
+        </div>
+      </div>
+      <div class="day-label">Saturday</div>
+      <div class="day-group">
+        <div class="day-panel">
+          <div class="date">12AM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3AM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">6AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">9AM</div>
+          <div class="conditions">light snow</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">12PM</div>
+          <div class="conditions">clear sky</div>
+        </div>
+        <div class="day-panel">
+          <div class="date">3PM</div>
+          <div class="conditions">broken clouds</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
