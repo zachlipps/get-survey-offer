@@ -103,9 +103,12 @@ const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  max-height: 400px;
-  border-radius: 26px;
+  width: 100%;
+  max-width: 400px;
   background-color: lightblue;
+  @media (min-width: 480px) {
+    border-radius: 26px;
+  }
 `
 
 const StyledForm = styled.form`
