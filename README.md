@@ -1,3 +1,10 @@
+1. To run app 'npm install' then 'npm start'
+2. 'npm run test' to run tests
+3. Added unit tests but not 100% coverage
+4. Went with ajax for jsonp fetching for simplicity, would use something smaller for a small app if jquery didn't already exist
+
+README for create-react-app initial commit
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
