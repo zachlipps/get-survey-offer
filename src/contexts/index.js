@@ -1,1 +1,1 @@
-export { SurveryContext, SurveryContextProvider } from './survey-offers'
+export { SurveryContext, SurveryContextProvider } from './survey-offers/index'

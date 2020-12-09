@@ -1,1 +1,1 @@
-export { default as CheckOffer } from './CheckOffer'
+export { default as CheckOffer } from './check-offer/index'
